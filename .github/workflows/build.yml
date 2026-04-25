@@ -40,17 +40,16 @@ jobs:
     - name: BlinkTests
       run: xcodebuild -project Blink.xcodeproj -scheme BlinkTests -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M5)' test | xcpretty
 
-    # - name: actual build
-    #   run: set -o pipefail && xcodebuild archive -project Blink.xcodeproj -scheme Blink -sdk iphoneos -configuration Debug clean build IPHONEOS_DEPLOYMENT_TARGET='16.1' CODE_SIGN_IDENTITY='' CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | tee build.log | xcpretty
+    - name: actual build
+      run: set -o pipefail && xcodebuild archive -project Blink.xcodeproj -scheme Blink -sdk iphoneos -configuration Debug clean build IPHONEOS_DEPLOYMENT_TARGET='26.4' CODE_SIGN_IDENTITY='' CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO ONLY_ACTIVE_ARCH=NO | tee build.log | xcpretty
 
-    # - name: generate unsigned debug ipa
-    #   run: |
-    #     cd ~
-    #     mkdir Payload
-    #     mv ~/Library/Developer/Xcode/Archives/*/*/Products/Applications/Blink.app ~/Payload/
-    #     zip -r Blink.ipa Payload
-    # - name: upload ipa
-    #   uses: actions/upload-artifact@v2.2.0
-    #   with:
-    #     name: 'BlinkShell'
-    #     path: ~/Blink.ipa
+    - name: generate unsigned debug ipa
+      run: |
+        cd ~
+        mkdir Payload
+        mv ~/Library/Developer/Xcode/Archives/*/*/Products/Applications/Blink.app ~/Payload/
+        zip -r Blink.ipa Payload
+    - name: upload ipa
+      uses: actions/upload-artifact@v2.2.0      with:
+        name: 'BlinkShell'
+        path: ~/Blink.ipa#     path: ~/Blink.ipa
