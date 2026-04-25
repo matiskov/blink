@@ -50,7 +50,7 @@ jobs:
         mv ~/Library/Developer/Xcode/Archives/*/*/Products/Applications/Blink.app ~/Payload/
         zip -r Blink.ipa Payload
     - name: upload ipa
-      uses: actions/upload-artifact@v2.2.0      
+      uses: actions/upload-artifact@v7.0.1
       with:
         name: 'BlinkShell'
         path: ~/Blink.ipa
